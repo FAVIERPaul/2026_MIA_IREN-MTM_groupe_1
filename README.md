@@ -66,6 +66,12 @@ Présentez en quelques lignes :
 - Évitez de versionner des fichiers volumineux non nécessaires.
 - Vérifiez qu’un tiers peut comprendre et relancer votre projet sans explication orale.
 
+## Données et visualisation
+
+- Jeu de données : [Déchets dans les cantines](https://www.data.gouv.fr/datasets/dechets-dans-les-cantines), publié par la Ville de Saint-Quentin. Le CSV téléchargé est disponible dans [Data/canteens.csv](Data/canteens.csv).
+- Visualisation autonome : ouvrir [Data/dechets-cantines.html](Data/dechets-cantines.html) dans un navigateur. Aucun serveur ni installation n’est nécessaire.
+- La page compare les valeurs végétales et viande par ligne et situe les cantines à partir de leurs coordonnées. Le CSV ne précise pas l’unité des poids et ne contient ni date par observation ni nombre de repas : les totaux sont affichés en unités brutes, sans comparaison par convive ni évolution temporelle.
+
 ---
 
 ## Checklist avant rendu

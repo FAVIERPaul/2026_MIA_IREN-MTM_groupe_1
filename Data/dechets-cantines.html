@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173b35">
+  <title>Déchets dans les cantines | Saint-Quentin</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d2927;
+      --muted: #64716e;
+      --paper: #f5f6f1;
+      --white: #fff;
+      --green: #237b5b;
+      --green-dark: #173b35;
+      --coral: #d26950;
+      --yellow: #e7b94f;
+      --line: #dce2dc;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Aptos", "Segoe UI", sans-serif; font-size: 15px; line-height: 1.5; }
+    .masthead { color: #f8f8f1; background: var(--green-dark); background-image: linear-gradient(115deg, transparent 0 62%, #ffffff0b 62% 62.2%, transparent 62.2%), radial-gradient(ellipse at 86% 22%, #4f7864 0, transparent 43%); padding: 27px max(24px, calc((100% - 1220px) / 2)) 33px; }
+    .eyebrow, .section-kicker, .stat-label, .source-label { font-size: 11px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .eyebrow { color: #bad1c1; }
+    h1 { max-width: 760px; margin: 12px 0 7px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(32px, 5vw, 52px); font-weight: 500; line-height: 1.04; }
+    .dek { max-width: 690px; margin: 0; color: #d2ded5; font-size: 15px; }
+    main { max-width: 1220px; margin: 0 auto; padding: 28px 24px 42px; }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 29px; }
+    .stat { min-width: 0; padding: 16px 18px 17px 0; }
+    .stat + .stat { border-left: 1px solid var(--line); padding-left: 20px; }
+    .stat-label { display: block; color: var(--muted); letter-spacing: .08em; }
+    .stat-value { display: block; margin-top: 3px; font-size: 27px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .stat-note { display: block; margin-top: 1px; color: var(--muted); font-size: 12px; }
+    .content-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(300px, .85fr); gap: 34px; align-items: start; }
+    .section-head { display: flex; justify-content: space-between; gap: 18px; align-items: end; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+    .section-kicker { color: var(--green); }
+    h2 { margin: 3px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: 25px; font-weight: 500; line-height: 1.2; }
+    .section-note { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+    .switcher { display: inline-flex; flex: 0 0 auto; border: 1px solid #cbd4cd; border-radius: 5px; padding: 3px; background: #e9ede8; }
+    .switcher button { border: 0; border-radius: 3px; padding: 7px 10px; background: transparent; color: #44524e; font: inherit; font-size: 12px; cursor: pointer; }
+    .switcher button[aria-pressed="true"] { background: var(--white); color: var(--green-dark); box-shadow: 0 1px 3px #14281e1c; font-weight: 700; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 17px; padding: 12px 0 3px; color: var(--muted); font-size: 12px; }
+    .legend-item { display: inline-flex; gap: 7px; align-items: center; }
+    .key { width: 10px; height: 10px; border-radius: 2px; background: var(--green); }
+    .key.meat { background: var(--coral); }
+    .bars { padding-top: 5px; }
+    .bar-row { display: grid; grid-template-columns: minmax(112px, 150px) minmax(70px, 1fr) 52px; gap: 12px; align-items: center; min-height: 35px; }
+    .bar-name { overflow: hidden; color: #303d39; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { display: flex; height: 13px; overflow: hidden; border-radius: 2px; background: #e5e9e4; }
+    .bar-segment { height: 100%; transition: width .35s ease; }
+    .bar-segment.veg { background: var(--green); }
+    .bar-segment.meat { background: var(--coral); }
+    .bar-value { text-align: right; color: #34413d; font-size: 12px; font-variant-numeric: tabular-nums; }
+    .chart-foot { margin: 11px 0 0; color: var(--muted); font-size: 12px; }
+    .map-wrap { padding-top: 13px; }
+    .map-frame { display: block; width: 100%; height: auto; overflow: visible; }
+    .map-frame .gridline { stroke: #dfe5df; stroke-width: 1; stroke-dasharray: 2 5; }
+    .map-frame .axis { fill: #76827d; font: 10px "Segoe UI", sans-serif; }
+    .map-frame .site-leader { stroke: #73817a; stroke-width: 1; stroke-dasharray: 2 2; }
+    .map-frame .site { stroke: #fff; stroke-width: 2; cursor: pointer; }
+    .map-frame .site:hover, .map-frame .site:focus { stroke: var(--ink); stroke-width: 3; outline: none; }
+    .map-frame .site.veg { fill: var(--green); }
+    .map-frame .site.meat { fill: var(--coral); }
+    .map-frame .site-label { fill: #fff; font: 700 9px "Segoe UI", sans-serif; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+    .map-caption { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+    .map-key { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 12px; color: var(--muted); font-size: 12px; }
+    .map-key .key { border-radius: 50%; }
+    .map-legend-note { width: 100%; padding-top: 2px; }
+    .method { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 31px; padding: 17px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .method h3 { margin: 0 0 4px; font-size: 13px; }
+    .method p { margin: 0; color: var(--muted); font-size: 12px; }
+    .source { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; padding-top: 16px; color: var(--muted); font-size: 12px; }
+    .source a { color: var(--green-dark); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    @media (max-width: 800px) { .content-grid { grid-template-columns: 1fr; gap: 31px; } .map-section { max-width: 560px; } }
+    @media (max-width: 560px) {
+      .masthead { padding: 22px 19px 27px; }
+      main { padding: 22px 18px 32px; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .stat { padding: 12px 8px 13px 0; }
+      .stat + .stat { padding-left: 12px; }
+      .stat:nth-child(3) { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); }
+      .stat:nth-child(4) { border-top: 1px solid var(--line); }
+      .stat-value { font-size: 23px; }
+      .section-head { align-items: start; flex-direction: column; }
+      .switcher { width: 100%; }
+      .switcher button { flex: 1; }
+      .bar-row { grid-template-columns: minmax(92px, 122px) minmax(52px, 1fr) 44px; gap: 8px; }
+      .bar-name, .bar-value { font-size: 11px; }
+      .method { grid-template-columns: 1fr; gap: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="eyebrow">Données ouvertes · Saint-Quentin</div>
+    <h1>Déchets dans les cantines</h1>
+    <p class="dek">Comparer les masses enregistrées par site et repérer les écarts entre déchets végétaux et carnés.</p>
+  </header>
+  <main>
+    <section class="stats" aria-label="Chiffres clés">
+      <div class="stat"><span class="stat-label">Cantines</span><strong class="stat-value" id="site-count">—</strong><span class="stat-note">lignes dans le fichier</span></div>
+      <div class="stat"><span class="stat-label">Masse totale</span><strong class="stat-value" id="total-value">—</strong><span class="stat-note">unités brutes publiées</span></div>
+      <div class="stat"><span class="stat-label">Part végétale</span><strong class="stat-value" id="veg-share">—</strong><span class="stat-note" id="veg-detail">—</span></div>
+      <div class="stat"><span class="stat-label">Plus forte valeur</span><strong class="stat-value" id="top-site">—</strong><span class="stat-note" id="top-detail">—</span></div>
+    </section>
+
+    <div class="content-grid">
+      <section aria-labelledby="ranking-title">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Classement des sites</div>
+            <h2 id="ranking-title">Où les valeurs sont-elles les plus élevées ?</h2>
+            <p class="section-note" id="ranking-note">Total végétal + viande, ordre décroissant.</p>
+          </div>
+          <div class="switcher" role="group" aria-label="Indicateur à comparer">
+            <button type="button" data-mode="total" aria-pressed="true">Total</button>
+            <button type="button" data-mode="veg" aria-pressed="false">Végétal</button>
+            <button type="button" data-mode="meat" aria-pressed="false">Viande</button>
+          </div>
+        </div>
+        <div class="legend" aria-label="Légende du graphique">
+          <span class="legend-item"><span class="key"></span>Végétal</span>
+          <span class="legend-item"><span class="key meat"></span>Viande</span>
+        </div>
+        <div class="bars" id="bars" aria-live="polite"></div>
+        <p class="chart-foot">La longueur des barres compare les valeurs entre cantines; les barres « Total » montrent les deux composantes empilées.</p>
+      </section>
+
+      <section class="map-section" aria-labelledby="map-title">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Répartition géographique</div>
+            <h2 id="map-title">Les sites dans la ville</h2>
+            <p class="section-note">Coordonnées publiées pour chaque ligne.</p>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <svg id="site-map" class="map-frame" viewBox="0 0 440 330" role="img" aria-label="Carte schématique des cantines de Saint-Quentin"></svg>
+          <p class="map-caption">Schéma selon latitude et longitude, sans fond cartographique. Les marqueurs proches sont légèrement écartés pour rester lisibles.</p>
+          <div class="map-key" aria-label="Légende de la carte">
+            <span class="legend-item"><span class="key"></span>Végétal dominant</span>
+            <span class="legend-item"><span class="key meat"></span>Viande dominante</span>
+            <span class="map-legend-note">La taille du point représente le total des deux valeurs.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="method" aria-label="Méthode et limites">
+      <div>
+        <h3>Comment lire ces chiffres</h3>
+        <p>Les barres additionnent les champs <code>Weight_Veg</code> et <code>Weight_Meat</code>. L’unité n’est pas spécifiée dans le CSV : les chiffres restent donc en unités brutes, sans conversion.</p>
+      </div>
+      <div>
+        <h3>Limites du jeu</h3>
+        <p>Le fichier ne contient ni date par observation ni nombre de repas. Il ne permet donc pas de suivre une évolution ou de comparer un gaspillage par convive. Les libellés répétés sont conservés comme deux lignes distinctes.</p>
+      </div>
+    </section>
+    <footer class="source">
+      <span><span class="source-label">Source</span> · <a href="https://www.data.gouv.fr/datasets/dechets-dans-les-cantines">Déchets dans les cantines — Ville de Saint-Quentin</a></span>
+      <span>CSV <a href="https://static.data.gouv.fr/resources/dechets-dans-les-cantines/20230626-090854/canteens.csv">canteens.csv</a> · récupéré le 27 octobre 2026</span>
+    </footer>
+  </main>
+  <script>
+    const canteens = [
+      { name: "Francois Collery", veg: 2485, meat: 783, lat: 49.86178, lng: 3.29676 },
+      { name: "Pierre Laroche", veg: 2489, meat: 1792, lat: 49.853, lng: 3.3065 },
+      { name: "Alfred Clin", veg: 1309, meat: 2122, lat: 49.85669978575085, lng: 3.287780380115514 },
+      { name: "Ernest Lavisse", veg: 2913, meat: 2356, lat: 49.836082469645746, lng: 3.2668928778863844 },
+      { name: "Ferdinand Buisson", veg: 2198, meat: 2423, lat: 49.860956030629374, lng: 3.272377239847021 },
+      { name: "François Collery", veg: 1502, meat: 2965, lat: 49.85393967604077, lng: 3.305321264296633 },
+      { name: "Georges Bachy", veg: 2231, meat: 2756, lat: 49.85229570787129, lng: 3.273726713622155 },
+      { name: "Girondins", veg: 2456, meat: 2332, lat: 49.83797258000559, lng: 3.3081328099499974 },
+      { name: "Henri Arnould", veg: 2053, meat: 2861, lat: 49.835119840316096, lng: 3.3173595105530023 },
+      { name: "Jean Macé", veg: 2319, meat: 2153, lat: 49.845745240758525, lng: 3.2666709535512433 },
+      { name: "Lyon-Jumentier", veg: 2263, meat: 2342, lat: 49.84528688818357, lng: 3.2845262840674634 },
+      { name: "Paul Bert", veg: 2389, meat: 2154, lat: 49.86304810277166, lng: 3.3058150243205797 },
+      { name: "Pierre Laroche", veg: 2410, meat: 2075, lat: 49.861784971811346, lng: 3.2974701634822012 },
+      { name: "Quentin Barre", veg: 2578, meat: 2465, lat: 49.8485737006544, lng: 3.299448504659171 }
+    ].map((site, index, rows) => {
+      const normalizedName = site.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      const duplicates = rows.filter(row => row.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() === normalizedName).length;
+      const occurrence = rows.slice(0, index + 1).filter(row => row.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() === normalizedName).length;
+      return { ...site, total: site.veg + site.meat, label: duplicates > 1 ? `${site.name} · ${occurrence}` : site.name };
+    });
+
+    const numberFormat = new Intl.NumberFormat("fr-FR");
+    const sums = canteens.reduce((result, site) => ({ veg: result.veg + site.veg, meat: result.meat + site.meat }), { veg: 0, meat: 0 });
+    const allTotal = sums.veg + sums.meat;
+    const highest = [...canteens].sort((a, b) => b.total - a.total)[0];
+    document.getElementById("site-count").textContent = numberFormat.format(canteens.length);
+    document.getElementById("total-value").textContent = numberFormat.format(allTotal);
+    document.getElementById("veg-share").textContent = `${(sums.veg / allTotal * 100).toLocaleString("fr-FR", { maximumFractionDigits: 1 })} %`;
+    document.getElementById("veg-detail").textContent = `${numberFormat.format(sums.veg)} végétal sur ${numberFormat.format(allTotal)}`;
+    document.getElementById("top-site").textContent = highest.label;
+    document.getElementById("top-detail").textContent = `${numberFormat.format(highest.total)} unités brutes`;
+
+    const bars = document.getElementById("bars");
+    const map = document.getElementById("site-map");
+    let activeMode = "total";
+
+    function renderBars() {
+      const ordered = [...canteens].sort((a, b) => b[activeMode] - a[activeMode]);
+      const maximum = ordered[0][activeMode];
+      bars.replaceChildren(...ordered.map(site => {
+        const row = document.createElement("div");
+        row.className = "bar-row";
+        const label = document.createElement("span");
+        label.className = "bar-name";
+        label.textContent = site.label;
+        label.title = site.label;
+        const track = document.createElement("span");
+        track.className = "bar-track";
+        track.setAttribute("aria-label", `${site.label} : ${numberFormat.format(site[activeMode])}`);
+        if (activeMode === "total") {
+          const veg = document.createElement("span");
+          veg.className = "bar-segment veg";
+          veg.style.width = `${site.veg / maximum * 100}%`;
+          const meat = document.createElement("span");
+          meat.className = "bar-segment meat";
+          meat.style.width = `${site.meat / maximum * 100}%`;
+          track.append(veg, meat);
+        } else {
+          const segment = document.createElement("span");
+          segment.className = `bar-segment ${activeMode}`;
+          segment.style.width = `${site[activeMode] / maximum * 100}%`;
+          track.append(segment);
+        }
+        const value = document.createElement("span");
+        value.className = "bar-value";
+        value.textContent = numberFormat.format(site[activeMode]);
+        row.append(label, track, value);
+        return row;
+      }));
+      const modeNames = { total: "Total végétal + viande", veg: "Valeurs végétales", meat: "Valeurs viande" };
+      document.getElementById("ranking-note").textContent = `${modeNames[activeMode]}, ordre décroissant.`;
+    }
+
+    function renderMap() {
+      const width = 440, height = 330, pad = { left: 44, right: 19, top: 19, bottom: 36 };
+      const latitudes = canteens.map(site => site.lat), longitudes = canteens.map(site => site.lng);
+      const minLat = Math.min(...latitudes) - 0.003, maxLat = Math.max(...latitudes) + 0.003;
+      const minLng = Math.min(...longitudes) - 0.004, maxLng = Math.max(...longitudes) + 0.004;
+      const x = lng => pad.left + (lng - minLng) / (maxLng - minLng) * (width - pad.left - pad.right);
+      const y = lat => height - pad.bottom - (lat - minLat) / (maxLat - minLat) * (height - pad.top - pad.bottom);
+      const grid = [];
+      for (let step = 0; step <= 4; step++) {
+        const gridX = pad.left + step * (width - pad.left - pad.right) / 4;
+        const gridY = pad.top + step * (height - pad.top - pad.bottom) / 4;
+        grid.push(`<line class="gridline" x1="${gridX}" y1="${pad.top}" x2="${gridX}" y2="${height - pad.bottom}"/><line class="gridline" x1="${pad.left}" y1="${gridY}" x2="${width - pad.right}" y2="${gridY}"/>`);
+        grid.push(`<text class="axis" x="${gridX}" y="${height - 13}" text-anchor="middle">${(minLng + step / 4 * (maxLng - minLng)).toFixed(3)}°</text>`);
+        grid.push(`<text class="axis" x="${pad.left - 7}" y="${gridY + 3}" text-anchor="end">${(maxLat - step / 4 * (maxLat - minLat)).toFixed(3)}°</text>`);
+      }
+      const points = canteens.map((site, index) => ({
+        site,
+        index,
+        x: x(site.lng),
+        y: y(site.lat),
+        originalX: x(site.lng),
+        originalY: y(site.lat),
+        radius: 5 + Math.sqrt(site.total / highest.total) * 4
+      }));
+      for (let pass = 0; pass < 100; pass++) {
+        let moved = false;
+        for (let first = 0; first < points.length; first++) {
+          for (let second = first + 1; second < points.length; second++) {
+            const a = points[first], b = points[second];
+            let dx = b.x - a.x, dy = b.y - a.y;
+            let distance = Math.hypot(dx, dy);
+            const separation = a.radius + b.radius + 3;
+            if (distance >= separation) continue;
+            if (distance === 0) {
+              const angle = (a.index + b.index + 1) * 2.4;
+              dx = Math.cos(angle);
+              dy = Math.sin(angle);
+              distance = 1;
+            }
+            const push = (separation - distance) / 2;
+            const unitX = dx / distance, unitY = dy / distance;
+            a.x -= unitX * push;
+            a.y -= unitY * push;
+            b.x += unitX * push;
+            b.y += unitY * push;
+            moved = true;
+          }
+        }
+        points.forEach(point => {
+          point.x = Math.max(pad.left + point.radius, Math.min(width - pad.right - point.radius, point.x));
+          point.y = Math.max(pad.top + point.radius, Math.min(height - pad.bottom - point.radius, point.y));
+        });
+        if (!moved) break;
+      }
+      const dots = points.map(({ site, index, x: pointX, y: pointY, originalX, originalY, radius }) => {
+        const color = site.veg >= site.meat ? "veg" : "meat";
+        const leader = Math.hypot(pointX - originalX, pointY - originalY) > 4
+          ? `<line class="site-leader" x1="${originalX}" y1="${originalY}" x2="${pointX}" y2="${pointY}"/>`
+          : "";
+        return `<g>${leader}<title>${site.label} · total ${numberFormat.format(site.total)} · végétal ${numberFormat.format(site.veg)} · viande ${numberFormat.format(site.meat)}</title><circle class="site ${color}" cx="${pointX}" cy="${pointY}" r="${radius}" tabindex="0" role="img" aria-label="${site.label}, total ${numberFormat.format(site.total)}"/><text class="site-label" x="${pointX}" y="${pointY}">${String(index + 1).padStart(2, "0")}</text></g>`;
+      });
+      map.innerHTML = `${grid.join("")}<g>${dots.join("")}</g>`;
+    }
+
+    document.querySelectorAll(".switcher button").forEach(button => {
+      button.addEventListener("click", () => {
+        activeMode = button.dataset.mode;
+        document.querySelectorAll(".switcher button").forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+        renderBars();
+      });
+    });
+    renderBars();
+    renderMap();
+  </script>
+</body>
+</html>
