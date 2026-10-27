@@ -1,0 +1,4 @@
+{
+ "compilerOptions": { "target": "ES2023", "module": "NodeNext", "moduleResolution": "NodeNext", "strict": true, "noEmit": true, "skipLibCheck": true, "types": ["node"] },
+ "include": ["./**/*.ts", "../src/network/types.ts", "../src/network/events.ts"]
+}
