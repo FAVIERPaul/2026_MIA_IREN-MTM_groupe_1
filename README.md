@@ -63,6 +63,8 @@ Le fichier [Liste_visas_exploitation_cinematographique_CNC_1945-2025.xlsx](./Dat
 - Producteur : Centre national du cinéma et de l’image animée (CNC)
 - Licence : [Licence Ouverte 2.0](https://www.etalab.gouv.fr/licence-ouverte-open-licence/)
 - Format : Excel (.xlsx)
+- Version HTML interactive : [visas.html](./Data/visas.html) (recherche et navigation par pages, sans installation)
+- Pour régénérer la page après une mise à jour du classeur : `python3 Code/convert_visas_to_html.py`
 
 ### 5) Presentation/
 - Slides de soutenance (PDF)
