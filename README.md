@@ -3,6 +3,7 @@
 **Master SIREN (Parcours IREN / MTM)**
 
 Bienvenue dans le dépôt de votre groupe.
+Membres du groupe : Jimmy Gehres, Moea RICHARD, Pauline PETITDIDIER, Lily ACQUART
 
 Ce dépôt sert à centraliser votre livrable final : code, documents, prompts, workflows et éléments de présentation.
 
@@ -53,6 +54,17 @@ Présentez en quelques lignes :
 ### 4) Data/
 - Données non confidentielles
 - Si données trop lourdes : fournir un lien (HuggingFace, Dropbox, etc.) + courte explication
+
+#### Base des visas d’exploitation cinématographique
+
+Le fichier [Liste_visas_exploitation_cinematographique_CNC_1945-2025.xlsx](./Data/Liste_visas_exploitation_cinematographique_CNC_1945-2025.xlsx) recense les visas d’exploitation cinématographique délivrés par le CNC de 1945 à 2025.
+
+- Source : [data.gouv.fr — Liste des visas d'exploitations cinématographiques délivrés de 1945 à 2025](https://www.data.gouv.fr/datasets/liste-des-visas-dexploitations-cinematographiques-delivres-de-1945-a-2025)
+- Producteur : Centre national du cinéma et de l’image animée (CNC)
+- Licence : [Licence Ouverte 2.0](https://www.etalab.gouv.fr/licence-ouverte-open-licence/)
+- Format : Excel (.xlsx)
+- Version HTML interactive : [visas.html](./Data/visas.html) (recherche et navigation par pages, sans installation)
+- Pour régénérer la page après une mise à jour du classeur : `python3 Code/convert_visas_to_html.py`
 
 ### 5) Presentation/
 - Slides de soutenance (PDF)
