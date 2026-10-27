@@ -3,6 +3,7 @@
 **Master SIREN (Parcours IREN / MTM)**
 
 Bienvenue dans le dépôt de votre groupe.
+Membres du groupe : Jimmy Gehres, 
 
 Ce dépôt sert à centraliser votre livrable final : code, documents, prompts, workflows et éléments de présentation.
 
