@@ -131,6 +131,23 @@ Astuce : ajoutez les fichiers temporaires au `.gitignore` (`*.aux`, `*.log`, `*.
 
 ---
 
+## Zotero : gérer votre bibliographie
+
+[Zotero](https://www.zotero.org) est un **gestionnaire de références bibliographiques** gratuit et open source (Windows, macOS, Linux).
+
+**Ce qu’il permet :**
+- **Collecter** des références en un clic depuis le navigateur grâce au *Zotero Connector* (articles, livres, pages web, rapports…), avec les métadonnées et le PDF quand il est disponible ;
+- **Organiser** sa bibliothèque en collections et tags, et annoter directement les PDF ;
+- **Citer** automatiquement dans Word, LibreOffice, Google Docs ou LaTeX, dans n’importe quel style (APA, Chicago, IEEE…) ;
+- **Partager** une bibliothèque de groupe pour travailler à plusieurs sur les mêmes sources.
+
+**Pourquoi l’utiliser dès maintenant ?**  
+Dès qu’on rédige un rapport, un **mémoire** ou une **revue de littérature**, on accumule des dizaines de sources. Les gérer à la main est source d’oublis, d’incohérences de format et de citations introuvables. Zotero garantit une bibliographie **complète, homogène et traçable**, et vous fera gagner beaucoup de temps pour la suite de vos études. C’est aussi un bon garde-fou face à l’IA générative : chaque référence citée doit exister et être vérifiable (les LLM inventent parfois des sources).
+
+**Avec LaTeX :** installez l’extension [Better BibTeX](https://retorque.re/zotero-better-bibtex/) pour exporter (et garder synchronisé) un fichier `.bib`, à importer dans Overleaf ou à placer à côté de votre `.tex` dans VS Code.
+
+---
+
 ## LLM, agent et MCP : quelle différence ?
 
 - **LLM (Large Language Model)** : un modèle qui reçoit du texte et génère du texte (GPT, Claude, Mistral, Llama…). Il ne fait que répondre : il n’agit pas sur le monde et ne connaît que ce qu’on lui met dans le contexte.
